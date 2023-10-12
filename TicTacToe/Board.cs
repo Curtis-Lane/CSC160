@@ -59,10 +59,10 @@
 
 		public Winner CheckForWinner() {
 			for(int i = 0; i < board.GetLength(0); i++) {
-				BoardSpace currentSpace = BoardSpace.EMPTY;
+				BoardSpace? currentSpace = null;
 				int streak = 0;
 				for(int j = 0; j < board.GetLength(1); j++) {
-					if(currentSpace == BoardSpace.EMPTY) {
+					if(currentSpace == null) {
 						currentSpace = board[i, j];
 					} else if(currentSpace != board[i, j]) {
 						break;
@@ -82,10 +82,10 @@
 			}
 
 			for(int i = 0; i < board.GetLength(1); i++) {
-				BoardSpace currentSpace = BoardSpace.EMPTY;
+				BoardSpace? currentSpace = null;
 				int streak = 0;
 				for(int j = 0; j < board.GetLength(0); j++) {
-					if(currentSpace == BoardSpace.EMPTY) {
+					if(currentSpace == null) {
 						currentSpace = board[j, i];
 					} else if(currentSpace != board[j, i]) {
 						break;
@@ -104,10 +104,10 @@
 				}
 			}
 
-			BoardSpace diagCurrentSpace = BoardSpace.EMPTY;
+			BoardSpace? diagCurrentSpace = null;
 			int diagStreak = 0;
 			for(int i = 0, j = 0; i < board.GetLength(0) && j < board.GetLength(1); i++, j++) {
-				if(diagCurrentSpace == BoardSpace.EMPTY) {
+				if(diagCurrentSpace == null) {
 					diagCurrentSpace = board[i, j];
 				} else if (diagCurrentSpace != board[i, j]) {
 					break;
@@ -125,10 +125,10 @@
 				}
 			}
 
-			diagCurrentSpace = BoardSpace.EMPTY;
+			diagCurrentSpace = null;
 			diagStreak = 0;
-			for(int i = 0, j = 2; i < board.GetLength(0) && j > 0; i++, j--) {
-				if(diagCurrentSpace == BoardSpace.EMPTY) {
+			for(int i = 0, j = 2; i < board.GetLength(0) && j >= 0; i++, j--) {
+				if(diagCurrentSpace == null) {
 					diagCurrentSpace = board[i, j];
 				} else if(diagCurrentSpace != board[i, j]) {
 					break;
@@ -146,12 +146,7 @@
 				}
 			}
 
-			Winner tieState = CheckForTie();
-			if(tieState != Winner.NONE) {
-				return tieState;
-			}
-
-			return Winner.NONE;
+			return CheckForTie();
 		}
 
 		private Winner CheckForTie() {

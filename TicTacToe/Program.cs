@@ -16,11 +16,11 @@ namespace TicTacToe {
 
 				if(playerName == null || playerName == "") {
 					Console.WriteLine("Names cannot be null or empty!" + "\n");
-					i--;
+					i -= 1;
 					continue;
 				} else if(players.Contains(playerName)) {
 					Console.WriteLine("Names must be unique per player!" + "\n");
-					i--;
+					i -= 1;
 					continue;
 				}
 
