@@ -68,7 +68,7 @@ namespace GrabTheTreasure {
 		}
 
 		public bool IsValidMove(int[] newPos) {
-			if(newPos[0] < 0 || newPos[0] > board.Length || newPos[1] < 0 || newPos[1] > board[0].Length) {
+			if(newPos[0] < 0 || newPos[0] >= board.Length || newPos[1] < 0 || newPos[1] >= board[0].Length) {
 				return false;
 			} else if(wallChars.Contains(board[newPos[0]][newPos[1]])) {
 				return false;
