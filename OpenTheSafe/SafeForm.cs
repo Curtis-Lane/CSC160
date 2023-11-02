@@ -13,6 +13,13 @@ namespace OpenTheSafe {
 		private TextBox[] codeParts;
 		private string safeCode;
 
+		private const int MAX_NUM_GUESSES = 5;
+		private int currentNumGuesses = 0;
+
+		private Bitmap CLOSED_SAFE_IMAGE = new Bitmap("../../../Images/closed.png");
+		private Bitmap ALMOST_OPEN_SAFE_IMAGE = new Bitmap("../../../Images/almost-open.png");
+		private Bitmap OPEN_SAFE_IMAGE = new Bitmap("../../../Images/open.png");
+
 		public SafeForm() {
 			InitializeComponent();
 			InitializeMembers();
@@ -35,8 +42,16 @@ namespace OpenTheSafe {
 				safeCode += new Random().Next(0, 10);
 			}
 
+			currentNumGuesses = 0;
+
 			guessStatusLabel.Text = "";
 			cheatCodeLabel.Text = "";
+			currentGuessesLabel.Text = "Current Guesses: 0";
+			maxGuessesLabel.Text = "Max Guesses: " + MAX_NUM_GUESSES.ToString();
+
+			safePictureBox.Image = CLOSED_SAFE_IMAGE;
+
+			guessLog.Items.Clear();
 		}
 
 		private enum GuessStatus {
@@ -48,11 +63,15 @@ namespace OpenTheSafe {
 		private GuessStatus Guess() {
 			StringBuilder code = new StringBuilder(codeParts.Length);
 
+			currentNumGuesses += 1;
+			currentGuessesLabel.Text = "Current Guesses: " + currentNumGuesses.ToString();
+
 			foreach(TextBox codePart in codeParts) {
 				if(codePart.Text == "") {
 					code.Append(' ');
+				} else {
+					code.Append(codePart.Text);
 				}
-				code.Append(codePart.Text);
 			}
 
 			int correctChars = 0;
@@ -62,29 +81,43 @@ namespace OpenTheSafe {
 				}
 			}
 
+			if(guessLog.Items.Count == 2) {
+				guessLog.Items.RemoveAt(0);
+			}
+
 			switch(correctChars) {
 				case 0:
 				case 1:
+					guessLog.Items.Add(code.ToString() + " Was not close");
 					return GuessStatus.NOT_CLOSE;
 				case 2:
+					guessLog.Items.Add(code.ToString() + " Was close");
 					return GuessStatus.CLOSE;
 				default:
+					guessLog.Items.Add(code.ToString() + " Was correct");
 					return GuessStatus.CORRECT;
 			}
 		}
 
 		private void codePart_KeyDown(object sender, KeyEventArgs e) {
-			if(e.KeyCode == Keys.Enter) {
+			if(e.KeyCode == Keys.Enter && currentNumGuesses != MAX_NUM_GUESSES && safePictureBox.Image != OPEN_SAFE_IMAGE) {
 				switch(Guess()) {
 					case GuessStatus.NOT_CLOSE:
 						guessStatusLabel.Text = "That was not close at all.";
+						safePictureBox.Image = CLOSED_SAFE_IMAGE;
 						break;
 					case GuessStatus.CLOSE:
 						guessStatusLabel.Text = "You're getting closer!";
+						safePictureBox.Image = ALMOST_OPEN_SAFE_IMAGE;
 						break;
 					case GuessStatus.CORRECT:
-						guessStatusLabel.Text = "You've cracked the safe!";
+						guessStatusLabel.Text = "You've cracked the safe! You Win!";
+						safePictureBox.Image = OPEN_SAFE_IMAGE;
 						break;
+				}
+
+				if(currentNumGuesses == MAX_NUM_GUESSES && safePictureBox.Image != OPEN_SAFE_IMAGE) {
+					guessStatusLabel.Text = "The safe's set off an alarm! You lost.";
 				}
 			}
 		}
@@ -109,6 +142,10 @@ namespace OpenTheSafe {
 
 		private void resetButton_Click(object sender, EventArgs e) {
 			Reset();
+		}
+
+		private void guessButton_Click(object sender, EventArgs e) {
+			codePart_KeyDown(sender, new KeyEventArgs(Keys.Enter));
 		}
 	}
 }
