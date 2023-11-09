@@ -26,7 +26,7 @@ namespace OpenTheSafe {
 		}
 
 		private void InitializeMembers() {
-			codeParts = new TextBox[3] { codePart1, codePart2, codePart3 };
+			codeParts = new TextBox[3] {codePart1, codePart2, codePart3};
 
 			Reset();
 		}
