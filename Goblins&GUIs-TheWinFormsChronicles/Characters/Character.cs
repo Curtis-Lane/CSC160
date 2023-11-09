@@ -50,7 +50,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.Characters {
 		}
 
 		private int SetStat(int stat) {
-			return Math.Clamp(stat, 0, 20);
+			return Math.Clamp(stat, 1, 20);
 		}
 	}
 }
