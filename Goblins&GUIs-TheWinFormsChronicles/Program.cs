@@ -1,4 +1,7 @@
-namespace Goblins_GUIs_TheWinFormsChronicles {
+using GoblinsGUIsTheWinFormsChronicles.UI;
+using GoblinsGUIsTheWinFormsChronicles.Controllers;
+
+namespace GoblinsGUIsTheWinFormsChronicles {
 	internal static class Program {
 		/// <summary>
 		///  The main entry point for the application.
@@ -7,8 +10,11 @@ namespace Goblins_GUIs_TheWinFormsChronicles {
 		static void Main() {
 			// To customize application configuration such as set high DPI settings or default font,
 			// see https://aka.ms/applicationconfiguration.
+			
 			ApplicationConfiguration.Initialize();
-			Application.Run(new Form1());
+			//Application.Run(new CharacterCreation());
+
+			new MainGame().Run();
 		}
 	}
 }

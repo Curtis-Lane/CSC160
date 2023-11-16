@@ -6,16 +6,16 @@ using System.Collections.Generic;
 namespace GoblinsGUIsTheWinFormsChronicles.Characters {
 	internal class Character {
 		public readonly string name;
-		protected ClassType classType {get;}
+		public ClassType classType {get;}
 
-		protected int strength {get;}
-		protected int dexterity {get;}
-		protected int constitution {get;}
-		protected int intelligence {get;}
-		protected int wisdom {get;}
-		protected int charisma {get;}
+		public int strength {get => strength; set => SetStat(value);}
+		public int dexterity {get => dexterity; set => SetStat(value);}
+		public int constitution {get => constitution; set => SetStat(value);}
+		public int intelligence {get => intelligence; set => SetStat(value);}
+		public int wisdom {get => wisdom; set => SetStat(value);}
+		public int charisma {get => charisma; set => SetStat(value);}
 
-		protected Dictionary<string, int> attacks {get;}
+		public Dictionary<string, int> attacks {get;}
 
 		public enum ClassType {
 			Fighter,
