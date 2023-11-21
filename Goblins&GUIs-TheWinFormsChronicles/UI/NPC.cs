@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoblinsGUIsTheWinFormsChronicles.Characters {
-	internal class NPC : Character {
+namespace GoblinsGUIsTheWinFormsChronicles.UI {
+	public class NPC : Character {
 		public struct DialogData {
 			public enum CheckType {
 				None,
@@ -36,7 +36,15 @@ namespace GoblinsGUIsTheWinFormsChronicles.Characters {
 		public List<DialogData> dialogData {get;}
 		public Dictionary<int, Dictionary<string, int>> responseData {get;}
 
-		public NPC(string name, ClassType classType, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, List<DialogData> dialogData, Dictionary<int, Dictionary<string, int>> responseData) : base(name, classType, strength, dexterity, constitution, intelligence, wisdom, charisma) {
+		public NPC(string name, ClassType classType, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, List<DialogData> dialogData, Dictionary<int, Dictionary<string, int>> responseData) {
+			this.Name = name;
+			this.Classtype = classType.ToString();
+			this.Strength = strength;
+			this.Dexterity = dexterity;
+			this.Constitution = constitution;
+			this.Intelligence = intelligence;
+			this.Wisdom = wisdom;
+			this.Charisma = charisma;
 			this.dialogData = dialogData;
 			this.responseData = responseData;
 		}

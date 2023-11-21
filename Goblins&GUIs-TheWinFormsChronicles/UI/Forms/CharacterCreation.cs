@@ -17,8 +17,12 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 		UI.Character playerCharacter;
 		string[] classTypes;
 
-		public CharacterCreation() {
+		ICreatePlayer game;
+
+		public CharacterCreation(ICreatePlayer mainGame) {
 			InitializeComponent();
+
+			this.game = mainGame;
 
 			playerCharacter = new Character();
 			classTypes = new string[] { "Fighter", "Wizard" };
@@ -148,7 +152,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 
 		private void endCreationButton_Click(object sender, EventArgs e) {
 			if(AreStatsValid()) {
-				MainGame.CreatePlayer(playerCharacter.Name, (Characters.Character.ClassType) playerCharacter.StringToClass(playerCharacter.Classtype), playerCharacter.Strength, playerCharacter.Dexterity, playerCharacter.Constitution, playerCharacter.Intelligence, playerCharacter.Wisdom, playerCharacter.Charisma);
+				game.CreatePlayer(playerCharacter.Name, (Characters.Character.ClassType) playerCharacter.StringToClass(playerCharacter.Classtype), playerCharacter.Strength, playerCharacter.Dexterity, playerCharacter.Constitution, playerCharacter.Intelligence, playerCharacter.Wisdom, playerCharacter.Charisma);
 				Close();
 			}
 		}

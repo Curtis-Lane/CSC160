@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GoblinsGUIsTheWinFormsChronicles.UI {
-	internal class Character : INotifyPropertyChanged {
+	public class Character : INotifyPropertyChanged {
 		public event PropertyChangedEventHandler? PropertyChanged;
 
 		private string name;

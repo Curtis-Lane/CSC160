@@ -4,16 +4,23 @@ using System.Collections.Generic;
 //using System.Text;
 
 namespace GoblinsGUIsTheWinFormsChronicles.Characters {
-	internal class Character {
+	public class Character {
 		public readonly string name;
 		public ClassType classType {get;}
 
-		public int strength {get => strength; set => SetStat(value);}
-		public int dexterity {get => dexterity; set => SetStat(value);}
-		public int constitution {get => constitution; set => SetStat(value);}
-		public int intelligence {get => intelligence; set => SetStat(value);}
-		public int wisdom {get => wisdom; set => SetStat(value);}
-		public int charisma {get => charisma; set => SetStat(value);}
+		private int strength;
+		private int dexterity;
+		private int constitution;
+		private int intelligence;
+		private int wisdom;
+		private int charisma;
+
+		public int Strength {get => strength; set => SetStat(value);}
+		public int Dexterity {get => dexterity; set => SetStat(value);}
+		public int Constitution {get => constitution; set => SetStat(value);}
+		public int Intelligence {get => intelligence; set => SetStat(value);}
+		public int Wisdom {get => wisdom; set => SetStat(value);}
+		public int Charisma {get => charisma; set => SetStat(value);}
 
 		public Dictionary<string, int> attacks {get;}
 
@@ -25,12 +32,12 @@ namespace GoblinsGUIsTheWinFormsChronicles.Characters {
 		public Character(string name, ClassType classType, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma) {
 			this.name = name;
 			this.classType = classType;
-			this.strength = SetStat(strength);
-			this.dexterity = SetStat(dexterity);
-			this.constitution = SetStat(constitution);
-			this.intelligence = SetStat(intelligence);
-			this.wisdom = SetStat(wisdom);
-			this.charisma = SetStat(charisma);
+			this.Strength = strength;
+			this.Dexterity = dexterity;
+			this.Constitution = constitution;
+			this.Intelligence = intelligence;
+			this.Wisdom = wisdom;
+			this.Charisma = charisma;
 
 			attacks = new Dictionary<string, int>();
 
