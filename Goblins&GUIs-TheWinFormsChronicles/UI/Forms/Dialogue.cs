@@ -33,10 +33,15 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 				foreach(var response in data.responses) {
 					Button responseButton = new Button();
 					responseButton.Location = new Point(6, 77 + (40 * numResponse));
-					responseButton.Text = response;
 					responseButton.Size = new Size(490, 40);
 					responseButton.Click += responseButton_Click;
 					responseButton.TabIndex = numResponse + 1;
+
+					if(response.Item2 == "None") {
+						responseButton.Text = response.Item1;
+					} else {
+						responseButton.Text = "(" + response.Item2 + " " + response.Item4.ToString() + "/" + response.Item3.ToString() + ") " + response.Item1;
+					}
 
 					dialogueBox.Controls.Add(responseButton);
 
@@ -54,7 +59,13 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 			for(int i = buttons.Count(); i > 0; i--) {
 				dialogueBox.Controls.Remove(buttons.ElementAt(i - 1));
 			}
-			GoToNextDialogue(((Button) sender).Text);
+
+			string[] responseText = ((Button) sender).Text.Split(')');
+			if(responseText.Length == 1) {
+				GoToNextDialogue(responseText[0]);
+			} else {
+				GoToNextDialogue(responseText[1].Trim());
+			}
 		}
 	}
 }

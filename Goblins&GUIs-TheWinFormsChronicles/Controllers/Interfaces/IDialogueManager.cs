@@ -20,8 +20,10 @@ namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 		/// <summary>
 		/// Returns a tuple that contains, in order, the dialogue of the NPC and any potential repsonses that the player might be able to use,
 		/// optionally taking in a string that represents what response the player has selected
+		/// 
+		/// Also returns any relevant information regarding skill checks for the current responses
 		/// </summary>
 		/// <returns></returns>
-		(string dialogue, List<string>? responses) GetNextDialogue(string? responseText = null);
+		(string dialogue, List<Tuple<string, string, int, int>>? responses) GetNextDialogue(string? responseText = null);
 	}
 }

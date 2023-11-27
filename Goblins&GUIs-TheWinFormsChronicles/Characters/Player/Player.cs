@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GoblinsGUIsTheWinFormsChronicles.Characters {
-	internal class Player : Character {
+	public class Player : Character {
 		public Player(string name, ClassType classType, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma) : base(name, classType, strength, dexterity, constitution, intelligence, wisdom, charisma) {
 			//
 		}
