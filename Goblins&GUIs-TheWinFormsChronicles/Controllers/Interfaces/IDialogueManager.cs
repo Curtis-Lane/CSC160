@@ -24,6 +24,6 @@ namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 		/// Also returns any relevant information regarding skill checks for the current responses
 		/// </summary>
 		/// <returns></returns>
-		(string dialogue, List<Tuple<string, string, int, int>>? responses) GetNextDialogue(string? responseText = null);
+		(string dialogue, List<(string response, string checkType, int dc, int playerStat)>? responses) GetNextDialogue(string? responseText = null);
 	}
 }

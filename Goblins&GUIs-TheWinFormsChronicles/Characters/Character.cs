@@ -72,11 +72,21 @@ namespace GoblinsGUIsTheWinFormsChronicles.Characters {
 			}
 		}
 
-		public Dictionary<string, int> attacks {get;}
+		public Dictionary<string, (int damage, CheckType type)> attacks {get;}
 
 		public enum ClassType {
 			Fighter,
 			Wizard
+		}
+
+		public enum CheckType {
+			None,
+			Str,
+			Dex,
+			Con,
+			Int,
+			Wis,
+			Cha
 		}
 
 		public Character(string name, ClassType classType, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma) {
@@ -89,17 +99,17 @@ namespace GoblinsGUIsTheWinFormsChronicles.Characters {
 			this.Wisdom = wisdom;
 			this.Charisma = charisma;
 
-			attacks = new Dictionary<string, int>();
+			attacks = new Dictionary<string, (int damage, CheckType type)>();
 
 			switch(classType) {
 				case ClassType.Fighter:
-					attacks["Punch"] = 1;
-					attacks["Sword"] = 3;
+					attacks["Punch"] = (2, CheckType.Str);
+					attacks["Sword"] = (5, CheckType.Str);
 					max_health = 50;
 					break;
 				case ClassType.Wizard:
-					attacks["Punch"] = 1;
-					attacks["Fireball"] = 5;
+					attacks["Punch"] = (2, CheckType.Str);
+					attacks["Fireball"] = (8, CheckType.Int);
 					max_health = 30;
 					break;
 				default:

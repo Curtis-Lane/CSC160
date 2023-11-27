@@ -27,6 +27,12 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 
 		private void GoToNextDialogue(string? responseText = null) {
 			var data = dialogueManager.GetNextDialogue(responseText);
+
+			if(data.dialogue == "-1") {
+				Close();
+				return;
+			}
+
 			dialogueText.Text = data.dialogue;
 			if(data.responses != null) {
 				int numResponse = 0;
@@ -37,10 +43,10 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 					responseButton.Click += responseButton_Click;
 					responseButton.TabIndex = numResponse + 1;
 
-					if(response.Item2 == "None") {
-						responseButton.Text = response.Item1;
+					if(response.checkType == "None") {
+						responseButton.Text = response.response;
 					} else {
-						responseButton.Text = "(" + response.Item2 + " " + response.Item4.ToString() + "/" + response.Item3.ToString() + ") " + response.Item1;
+						responseButton.Text = "(" + response.checkType + " " + response.playerStat.ToString() + "/" + response.dc.ToString() + ") " + response.response;
 					}
 
 					dialogueBox.Controls.Add(responseButton);

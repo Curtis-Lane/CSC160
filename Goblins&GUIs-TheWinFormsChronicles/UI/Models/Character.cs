@@ -30,6 +30,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 			}
 		}
 
+		private int health;
 		private int strength;
 		private int dexterity;
 		private int constitution;
@@ -37,6 +38,15 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 		private int wisdom;
 		private int charisma;
 
+		public int Health {
+			get {
+				return this.health;
+			}
+			set {
+				this.health = SetHealth(value);
+				NotifyPropertyChanged();
+			}
+		}
 		public int Strength {
 			get {
 				return this.strength;
@@ -99,6 +109,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 		public Character() {
 			name = "";
 
+			health = 1;
 			strength = 1;
 			dexterity = 1;
 			constitution = 1;
@@ -115,6 +126,10 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 
 		private int SetStat(int stat) {
 			return Math.Clamp(stat, 1, 20);
+		}
+
+		private int SetHealth(int health) {
+			return Math.Max(0, health);
 		}
 
 		public ClassType StringToClass(string str) {

@@ -19,16 +19,6 @@ namespace GoblinsGUIsTheWinFormsChronicles.Characters {
 		}
 
 		public struct ResponseData {
-			public enum CheckType {
-				None,
-				Str,
-				Dex,
-				Con,
-				Int,
-				Wis,
-				Cha
-			}
-
 			public CheckType checkType;
 			public int dc;
 			public int successDialogID;
@@ -46,7 +36,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.Characters {
 		// Going to have to implement some way to have skill checks
 		public Dictionary<int, Dictionary<string, ResponseData>> responseData {get;}
 
-		public NPC(string name, ClassType classType, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, List<DialogData> dialogData, Dictionary<int, Dictionary<string, ResponseData>> responseData) : base(name, classType, strength, dexterity, constitution, intelligence, wisdom, charisma) {
+		public NPC(string name, ClassType classType, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, List<DialogData> dialogData = null, Dictionary<int, Dictionary<string, ResponseData>> responseData = null) : base(name, classType, strength, dexterity, constitution, intelligence, wisdom, charisma) {
 			this.dialogData = dialogData;
 			this.responseData = responseData;
 		}

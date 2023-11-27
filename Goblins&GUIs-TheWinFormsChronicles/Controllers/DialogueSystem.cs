@@ -30,31 +30,31 @@ namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 			throw new Exception("Could not find any beginning dialogue for NPC " + currentNPC.name);
 		}
 
-		public (string dialogue, List<Tuple<string, string, int, int>>? responses) GetNextDialogue(string? responseText = null) {
+		public (string dialogue, List<(string response, string checkType, int dc, int playerStat)>? responses) GetNextDialogue(string? responseText = null) {
 			int responseID = int.MinValue;
 			if(responseText != null) {
 				NPC.ResponseData currentResponse = currentResponses[responseText];
-				if(currentResponse.checkType == NPC.ResponseData.CheckType.None) {
+				if(currentResponse.checkType == NPC.CheckType.None) {
 					responseID = currentResponse.successDialogID;
 				} else {
 					int playerStat = -1;
 					switch(currentResponse.checkType) {
-						case NPC.ResponseData.CheckType.Str:
+						case NPC.CheckType.Str:
 							playerStat = player.Strength;
 							break;
-						case NPC.ResponseData.CheckType.Dex:
+						case NPC.CheckType.Dex:
 							playerStat = player.Dexterity;
 							break;
-						case NPC.ResponseData.CheckType.Con:
+						case NPC.CheckType.Con:
 							playerStat = player.Constitution;
 							break;
-						case NPC.ResponseData.CheckType.Int:
+						case NPC.CheckType.Int:
 							playerStat = player.Intelligence;
 							break;
-						case NPC.ResponseData.CheckType.Wis:
+						case NPC.CheckType.Wis:
 							playerStat = player.Wisdom;
 							break;
-						case NPC.ResponseData.CheckType.Cha:
+						case NPC.CheckType.Cha:
 							playerStat = player.Charisma;
 							break;
 					}
@@ -69,6 +69,10 @@ namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 			string dialogue = currentData.dialog;
 
 			foreach(NPC.DialogData data in currentNPC.dialogData) {
+				if(currentData.nextDialogID == -1) {
+					return ("-1", new List<(string response, string checkType, int dc, int playerStat)> { });
+				}
+
 				if(responseID == int.MinValue) {
 					if(data.dialogID == currentData.nextDialogID) {
 						dialogue = data.dialog;
@@ -84,37 +88,37 @@ namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 				}
 			}
 
-			List<Tuple<string, string, int, int>>? responses = null;
+			List<(string response, string checkType, int dc, int playerStat)>? responses = null;
 
 			foreach(var data in currentNPC.responseData) {
 				if(data.Key == currentData.nextDialogID) {
 					currentResponses = data.Value;
-					responses = new List<Tuple<string, string, int, int>>();
+					responses = new List<(string response, string checkType, int dc, int playerStat)>();
 					foreach(string response in data.Value.Keys.ToList()) {
 						NPC.ResponseData currentResponse = currentResponses[response];
 						int playerStat = -1;
 						switch(currentResponse.checkType) {
-							case NPC.ResponseData.CheckType.Str:
+							case NPC.CheckType.Str:
 								playerStat = player.Strength;
 								break;
-							case NPC.ResponseData.CheckType.Dex:
+							case NPC.CheckType.Dex:
 								playerStat = player.Dexterity;
 								break;
-							case NPC.ResponseData.CheckType.Con:
+							case NPC.CheckType.Con:
 								playerStat = player.Constitution;
 								break;
-							case NPC.ResponseData.CheckType.Int:
+							case NPC.CheckType.Int:
 								playerStat = player.Intelligence;
 								break;
-							case NPC.ResponseData.CheckType.Wis:
+							case NPC.CheckType.Wis:
 								playerStat = player.Wisdom;
 								break;
-							case NPC.ResponseData.CheckType.Cha:
+							case NPC.CheckType.Cha:
 								playerStat = player.Charisma;
 								break;
 						}
 
-						responses.Add(new Tuple<string, string, int, int>(response, currentResponse.checkType.ToString(), currentResponse.dc, playerStat));
+						responses.Add((response, currentResponse.checkType.ToString(), currentResponse.dc, playerStat));
 					}
 					break;
 				}
