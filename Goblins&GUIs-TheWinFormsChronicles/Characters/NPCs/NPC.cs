@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GoblinsGUIsTheWinFormsChronicles.Characters {
-	internal class NPC : Character {
+	public class NPC : Character {
 		public struct DialogData {
 			public enum CheckType {
 				None,

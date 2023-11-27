@@ -7,81 +7,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GoblinsGUIsTheWinFormsChronicles.Controllers;
 
 namespace GoblinsGUIsTheWinFormsChronicles.UI {
 	public partial class Dialogue : Form {
-		static NPC currentNPC;
-		static NPC.DialogData currentData;
-		static Dictionary<string, int> currentResponses;
+		private IDialogueManager dialogueManager;
 
-		public Dialogue(NPC currentDialogueNPC) {
+		public Dialogue(IDialogueManager dialogueManager) {
 			InitializeComponent();
-			currentNPC = currentDialogueNPC;
+			this.dialogueManager = dialogueManager;
 			StartDialogue();
 		}
 
 		private void StartDialogue() {
-			dialogueBox.Text = currentNPC.Name;
-			foreach(NPC.DialogData data in currentNPC.dialogData) {
-				if(data.dialogID == 0) {
-					dialogueText.Text = data.dialog;
-					currentData = data;
-					break;
-				}
-			}
+			var data = dialogueManager.GetFirstDialogue();
+			dialogueBox.Text = data.name;
+			dialogueText.Text = data.dialogue;
 		}
 
-		private void GoToNextDialogue(int dialogID = int.MinValue) {
-			foreach(NPC.DialogData data in currentNPC.dialogData) {
-				if(dialogID == int.MinValue) {
-					if(data.dialogID == currentData.nextDialogID) {
-						dialogueText.Text = data.dialog;
-						currentData = data;
-						return;
-					}
-				} else {
-					if(data.dialogID == dialogID) {
-						dialogueText.Text = data.dialog;
-						currentData = data;
-						return;
-					}
-				}
-			}
-			foreach(var data in currentNPC.responseData) {
-				if(dialogID == int.MinValue) {
-					if(data.Key == currentData.nextDialogID) {
-						currentResponses = data.Value;
-						int numResponse = 0;
-						foreach(var response in data.Value) {
-							Button responseButton = new Button();
-							responseButton.Location = new Point(6, 77 + (40 * numResponse));
-							responseButton.Text = response.Key;
-							responseButton.Size = new Size(490, 40);
-							responseButton.Click += responseButton_Click;
+		private void GoToNextDialogue(string? responseText = null) {
+			var data = dialogueManager.GetNextDialogue(responseText);
+			dialogueText.Text = data.dialogue;
+			if(data.responses != null) {
+				int numResponse = 0;
+				foreach(var response in data.responses) {
+					Button responseButton = new Button();
+					responseButton.Location = new Point(6, 77 + (40 * numResponse));
+					responseButton.Text = response;
+					responseButton.Size = new Size(490, 40);
+					responseButton.Click += responseButton_Click;
+					responseButton.TabIndex = numResponse + 1;
 
-							dialogueBox.Controls.Add(responseButton);
+					dialogueBox.Controls.Add(responseButton);
 
-							numResponse += 1;
-						}
-						return;
-					}
-				} else {
-					if(data.Key == dialogID) {
-						currentResponses = data.Value;
-						int numResponse = 0;
-						foreach(var response in data.Value) {
-							Button responseButton = new Button();
-							responseButton.Location = new Point(6, 77 + (40 * numResponse));
-							responseButton.Text = response.Key;
-							responseButton.Size = new Size(490, 40);
-							responseButton.Click += responseButton_Click;
-
-							dialogueBox.Controls.Add(responseButton);
-
-							numResponse += 1;
-						}
-						return;
-					}
+					numResponse += 1;
 				}
 			}
 		}
@@ -95,7 +54,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 			for(int i = buttons.Count(); i > 0; i--) {
 				dialogueBox.Controls.Remove(buttons.ElementAt(i - 1));
 			}
-			GoToNextDialogue(currentResponses[((Button) sender).Text]);
+			GoToNextDialogue(((Button) sender).Text);
 		}
 	}
 }
