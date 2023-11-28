@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 using GoblinsGUIsTheWinFormsChronicles.Characters;
-//using GoblinsGUIsTheWinFormsChronicles.UI;
 
 namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 	internal class MainGame : ICreatePlayer {
-		private Characters.NPC narrator;
+		private NPC narrator;
 		static Player? player = null;
 
 		public MainGame() {
@@ -23,7 +22,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 
 			new DialogueSystem(narrator, player);
 
-			new CombatSystem(player, new NPC("Enemy", Character.ClassType.Fighter, 8, 8, 1, 8, 8, 8));
+			new CombatSystem(player, new NPC("Bandit", Character.ClassType.Fighter, 13, 14, 9, 7, 10, 11));
 		}
 
 		public void CreatePlayer(string name, Character.ClassType classType, int str, int dex, int con, int inte, int wis, int cha) {
@@ -31,11 +30,12 @@ namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 		}
 
 		private void InitializeNarrator() {
-			List<NPC.DialogData> narratorDialogue = new List<Characters.NPC.DialogData>();
+			List<NPC.DialogData> narratorDialogue = new List<NPC.DialogData>();
 			narratorDialogue.Add(new NPC.DialogData("Welcome adventurer, to the world of Goblins and GUIs!", 0, 1));
 			narratorDialogue.Add(new NPC.DialogData("Within this land, you will hopefully travel far and have many adventures.", 1, 2));
 			narratorDialogue.Add(new NPC.DialogData("Now to get started!", 2, 3));
 			narratorDialogue.Add(new NPC.DialogData("In front of you lies a tavern, do you choose to enter it?", 3, 4));
+
 			narratorDialogue.Add(new NPC.DialogData("Inside the tavern, you spot a quest board against the wall.", 5, 8));
 			narratorDialogue.Add(new NPC.DialogData("On the quest board are a number of different possible adventures for you to go on.", 8, 9));
 			narratorDialogue.Add(new NPC.DialogData("Relying on complete randomness, you pick a piece of paper off the board and head out.", 9, 10));
@@ -49,6 +49,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 			narratorDialogue.Add(new NPC.DialogData("You chose not to enter the tavern, and you instead wonder off in a random direction.", 6, 7));
 			narratorDialogue.Add(new NPC.DialogData("After a brief period of wondering around, you spot a woman standing in front of a tree.", 7, 16));
 			narratorDialogue.Add(new NPC.DialogData("She is currently staring up into the branches, as if something is there.", 16, 17));
+
 			narratorDialogue.Add(new NPC.DialogData("You decide to approach the woman.", 17, 18));
 
 			narratorDialogue.Add(new NPC.DialogData("\"Oh, could you help me? My little baby got scared and ran up this tree and now won't come down.\"", 18, 19));
@@ -62,11 +63,12 @@ namespace GoblinsGUIsTheWinFormsChronicles.Controllers {
 			narratorDialogue.Add(new NPC.DialogData("\"Well, thanks for trying dear. I know how fiesty my baby can get.\"", 25, 26));
 			narratorDialogue.Add(new NPC.DialogData("After bidding the woman farewell, you proceed on your way.", 26, 27));
 
-			narratorDialogue.Add(new NPC.DialogData("//", 27, -1));
+			narratorDialogue.Add(new NPC.DialogData("After traveling along the path further for a while, you start to notice some faint rustling in the surrounding bushes.", 27, 28));
+			narratorDialogue.Add(new NPC.DialogData("Suddenly, a bandit jumps out of the bushes and attacks you!", 28, -1));
 
 			Dictionary<int, Dictionary<string, NPC.ResponseData>> narratorResponses = new Dictionary<int, Dictionary<string, NPC.ResponseData>>();
 			narratorResponses[4] = new Dictionary<string, NPC.ResponseData>() {{"Yes", new NPC.ResponseData(5)}, {"No", new NPC.ResponseData(6)}};
-			narratorResponses[20] = new Dictionary<string, NPC.ResponseData>() {{"Get the cat out of the tree", new NPC.ResponseData(21, NPC.CheckType.Dex, 8, 24)}};
+			narratorResponses[20] = new Dictionary<string, NPC.ResponseData>() {{"Get the cat out of the tree", new NPC.ResponseData(21, Character.CheckType.Dex, 8, 24)}};
 
 			narrator = new NPC("Narrator", Character.ClassType.Fighter, int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue, narratorDialogue, narratorResponses);
 		}

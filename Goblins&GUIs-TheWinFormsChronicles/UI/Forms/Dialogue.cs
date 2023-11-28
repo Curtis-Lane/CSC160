@@ -63,6 +63,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 		private void responseButton_Click(object sender, EventArgs e) {
 			IEnumerable<Button> buttons = dialogueBox.Controls.OfType<Button>();
 			for(int i = buttons.Count(); i > 0; i--) {
+				buttons.ElementAt(i - 1).Enabled = false;
 				dialogueBox.Controls.Remove(buttons.ElementAt(i - 1));
 			}
 
@@ -71,6 +72,12 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 				GoToNextDialogue(responseText[0]);
 			} else {
 				GoToNextDialogue(responseText[1].Trim());
+			}
+		}
+
+		private void form_KeyCode(object sender, KeyEventArgs e) {
+			if(e.KeyCode == Keys.Enter || e.KeyCode == Keys.Space) {
+				GoToNextDialogue();
 			}
 		}
 	}

@@ -56,6 +56,7 @@
 			Controls.Add(dialogueBox);
 			Name = "Dialogue";
 			Text = "Dialogue";
+			this.KeyDown += this.form_KeyCode;
 			dialogueBox.ResumeLayout(false);
 			dialogueBox.PerformLayout();
 			ResumeLayout(false);

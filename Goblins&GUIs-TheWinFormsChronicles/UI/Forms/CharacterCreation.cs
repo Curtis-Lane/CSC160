@@ -125,7 +125,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 
 		private void intEntry_KeyDown(object sender, KeyEventArgs e) {
 			if(e.KeyCode == Keys.Enter) {
-				playerCharacter.Intelligence = int.Parse(intelligenceDisplay.Text);
+				playerCharacter.Intelligence = int.Parse(intelligenceEntry.Text);
 			}
 		}
 

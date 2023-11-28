@@ -50,11 +50,13 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 		}
 
 		void attackButton_Click(object sender, EventArgs e) {
-			enemy.Health = combatManager.PlayerAttack(((Button) sender).Text);
+			if(!combatManager.IsThereAVictor()) {
+				enemy.Health = combatManager.PlayerAttack(((Button) sender).Text);
 
-			var result = combatManager.EnemyAttack();
-			player.Health = result.health;
-			enemyAttackLabel.Text = "The enemy used " + result.attack + "!";
+				var result = combatManager.EnemyAttack();
+				player.Health = result.health;
+				enemyAttackLabel.Text = "The enemy used " + result.attack + "!";
+			}
 
 			if(combatManager.IsThereAVictor()) {
 				if(combatManager.IsThePlayerTheVictor()) {
