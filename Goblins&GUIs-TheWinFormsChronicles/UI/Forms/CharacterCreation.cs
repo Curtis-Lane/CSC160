@@ -8,22 +8,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using GoblinsGUIsTheWinFormsChronicles.Controllers;
+using GoblinsGUIsGameLogic.Controllers;
+using GoblinsGUIsGameLogic.Characters;
+using GoblinsGUIsGameLogic.UI.Models;
 
 namespace GoblinsGUIsTheWinFormsChronicles.UI {
 	public partial class CharacterCreation : Form {
 		Random random = new Random();
-		UI.Character playerCharacter;
+		GoblinsGUIsGameLogic.UI.Models.Character playerCharacter;
 		string[] classTypes;
 
-		ICreatePlayer playerCreator;
+		//ICreatePlayer playerCreator;
 
-		public CharacterCreation(ICreatePlayer playerCreator) {
+		public CharacterCreation(/*ICreatePlayer playerCreator*/) {
 			InitializeComponent();
 
-			this.playerCreator = playerCreator;
+			//this.playerCreator = playerCreator;
 
-			playerCharacter = new Character();
+			playerCharacter = new GoblinsGUIsGameLogic.UI.Models.Character();
 			classTypes = new string[] {"Fighter", "Wizard"};
 
 			InitializeCharacterInfo();
@@ -151,7 +153,11 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 
 		private void endCreationButton_Click(object sender, EventArgs e) {
 			if(AreStatsValid()) {
-				playerCreator.CreatePlayer(playerCharacter.Name, (Characters.Character.ClassType) playerCharacter.StringToClass(playerCharacter.Classtype), playerCharacter.Strength, playerCharacter.Dexterity, playerCharacter.Constitution, playerCharacter.Intelligence, playerCharacter.Wisdom, playerCharacter.Charisma);
+				MainGame.CreatePlayer(playerCharacter.Name, (GoblinsGUIsGameLogic.Characters.Character.ClassType) playerCharacter.StringToClass(playerCharacter.Classtype), playerCharacter.Strength, playerCharacter.Dexterity, playerCharacter.Constitution, playerCharacter.Intelligence, playerCharacter.Wisdom, playerCharacter.Charisma);
+
+				Hide();
+				new Dialogue().ShowDialog();
+
 				Close();
 			}
 		}

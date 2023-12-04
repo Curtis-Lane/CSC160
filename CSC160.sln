@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrabTheTreasure", "GrabTheT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTheSafe", "OpenTheSafe\OpenTheSafe.csproj", "{6D12A480-7CE1-49D8-B7CA-8C475B052C6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goblins&GUIs-TheWinFormsChronicles", "Goblins&GUIs-TheWinFormsChronicles\Goblins&GUIs-TheWinFormsChronicles.csproj", "{B3E585E6-3C58-4167-A999-B25F7078D749}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Goblins&GUIs-TheWinFormsChronicles", "Goblins&GUIs-TheWinFormsChronicles\Goblins&GUIs-TheWinFormsChronicles.csproj", "{B3E585E6-3C58-4167-A999-B25F7078D749}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Goblins&GUIs-GameLogic", "Goblins&GUIs-GameLogic\Goblins&GUIs-GameLogic.csproj", "{93ACAB43-39DE-4972-8109-6F1752AC0839}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoblinsGUIsMAUI", "GoblinsGUIsMAUI\GoblinsGUIsMAUI.csproj", "{5901EDF8-4157-4144-ABC1-C5FFA69C2836}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,16 @@ Global
 		{B3E585E6-3C58-4167-A999-B25F7078D749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3E585E6-3C58-4167-A999-B25F7078D749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3E585E6-3C58-4167-A999-B25F7078D749}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93ACAB43-39DE-4972-8109-6F1752AC0839}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93ACAB43-39DE-4972-8109-6F1752AC0839}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93ACAB43-39DE-4972-8109-6F1752AC0839}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93ACAB43-39DE-4972-8109-6F1752AC0839}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5901EDF8-4157-4144-ABC1-C5FFA69C2836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5901EDF8-4157-4144-ABC1-C5FFA69C2836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5901EDF8-4157-4144-ABC1-C5FFA69C2836}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5901EDF8-4157-4144-ABC1-C5FFA69C2836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5901EDF8-4157-4144-ABC1-C5FFA69C2836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5901EDF8-4157-4144-ABC1-C5FFA69C2836}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

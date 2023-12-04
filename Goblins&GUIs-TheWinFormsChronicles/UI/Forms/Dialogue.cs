@@ -7,29 +7,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using GoblinsGUIsTheWinFormsChronicles.Controllers;
+using GoblinsGUIsGameLogic.Controllers;
 
 namespace GoblinsGUIsTheWinFormsChronicles.UI {
 	public partial class Dialogue : Form {
-		private IDialogueManager dialogueManager;
+		//private IDialogueManager dialogueManager;
 
-		public Dialogue(IDialogueManager dialogueManager) {
+		public Dialogue(/*IDialogueManager dialogueManager*/) {
 			InitializeComponent();
-			this.dialogueManager = dialogueManager;
+			//this.dialogueManager = dialogueManager;
 			StartDialogue();
 		}
 
 		private void StartDialogue() {
-			var data = dialogueManager.GetFirstDialogue();
+			var data = DialogueSystem.GetFirstDialogue();
 			dialogueBox.Text = data.name;
 			dialogueText.Text = data.dialogue;
 		}
 
 		private void GoToNextDialogue(string? responseText = null) {
-			var data = dialogueManager.GetNextDialogue(responseText);
+			var data = DialogueSystem.GetNextDialogue(responseText);
 
 			if(data.dialogue == "-1") {
+				Hide();
+				new Combat().ShowDialog();
+
 				Close();
+
 				return;
 			}
 

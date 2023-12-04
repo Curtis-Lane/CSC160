@@ -1,5 +1,4 @@
 using GoblinsGUIsTheWinFormsChronicles.UI;
-using GoblinsGUIsTheWinFormsChronicles.Controllers;
 
 namespace GoblinsGUIsTheWinFormsChronicles {
 	internal static class Program {
@@ -12,9 +11,7 @@ namespace GoblinsGUIsTheWinFormsChronicles {
 			// see https://aka.ms/applicationconfiguration.
 			
 			ApplicationConfiguration.Initialize();
-			//Application.Run(new CharacterCreation());
-
-			new MainGame().Run();
+			Application.Run(new CharacterCreation());
 		}
 	}
 }
