@@ -7,35 +7,43 @@ using System.Threading.Tasks;
 using GoblinsGUIsGameLogic.Characters;
 
 namespace GoblinsGUIsGameLogic.Controllers {
-	public class MainGame : ICreatePlayer {
-		private static NPC narrator;
-		private static Player? player = null;
+	public class MainGame : IMainGame {
+		public NPC narrator;
+		public static Player? player = null;
 
-		//public MainGame() {
-		//	InitializeNarrator();
-		//}
-
-		//public void Run() {
-		//	while(player == null) {
-		//		//Application.Run(new UI.CharacterCreation(this));
-		//	}
-
-		//	new DialogueSystem(narrator, player);
-
-		//	new CombatSystem(player, new NPC("Bandit", Character.ClassType.Fighter, 13, 14, 9, 7, 10, 11));
-		//}
-
-		public static void CreatePlayer(string name, Character.ClassType classType, int str, int dex, int con, int inte, int wis, int cha) {
-			player = new Player(name, classType, str, dex, con, inte, wis, cha);
-
+		public MainGame() {
 			InitializeNarrator();
+		}
+
+		/*
+		public void Run() {
+			while(player == null) {
+				//Application.Run(new UI.CharacterCreation(this));
+			}
 
 			new DialogueSystem(narrator, player);
 
 			new CombatSystem(player, new NPC("Bandit", Character.ClassType.Fighter, 13, 14, 9, 7, 10, 11));
 		}
+		*/
 
-		private static void InitializeNarrator() {
+		public void CreatePlayer(string name, Character.ClassType classType, int str, int dex, int con, int inte, int wis, int cha) {
+			player = new Player(name, classType, str, dex, con, inte, wis, cha);
+		}
+
+		public Player GetPlayer() {
+			return player;
+		}
+
+		public NPC GetNarrator() {
+			return narrator;
+		}
+
+		public NPC GetBandit() {
+			return new NPC("Bandit", Character.ClassType.Fighter, 13, 14, 9, 7, 10, 11);
+		}
+
+		private void InitializeNarrator() {
 			List<NPC.DialogData> narratorDialogue = new List<NPC.DialogData>();
 			narratorDialogue.Add(new NPC.DialogData("Welcome adventurer, to the world of Goblins and GUIs!", 0, 1));
 			narratorDialogue.Add(new NPC.DialogData("Within this land, you will hopefully travel far and have many adventures.", 1, 2));

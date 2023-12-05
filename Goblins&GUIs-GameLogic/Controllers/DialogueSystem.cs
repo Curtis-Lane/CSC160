@@ -19,7 +19,7 @@ namespace GoblinsGUIsGameLogic.Controllers {
 			//Application.Run(new Dialogue(this));
 		}
 
-		public static (string name, string dialogue) GetFirstDialogue() {
+		public (string name, string dialogue) GetFirstDialogue() {
 			foreach(NPC.DialogData data in currentNPC.dialogData) {
 				if(data.dialogID == 0) {
 					currentData = data;
@@ -29,7 +29,7 @@ namespace GoblinsGUIsGameLogic.Controllers {
 			throw new Exception("Could not find any beginning dialogue for NPC " + currentNPC.name);
 		}
 
-		public static (string dialogue, List<(string response, string checkType, int dc, int playerStat)>? responses) GetNextDialogue(string? responseText = null) {
+		public (string dialogue, List<(string response, string checkType, int dc, int playerStat)>? responses) GetNextDialogue(string? responseText = null) {
 			int responseID = int.MinValue;
 			if(responseText != null) {
 				NPC.ResponseData currentResponse = currentResponses[responseText];

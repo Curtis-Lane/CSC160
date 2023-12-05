@@ -11,16 +11,16 @@ namespace GoblinsGUIsGameLogic.Controllers {
 		public static Player player;
 		public static NPC enemy;
 
-		static abstract (UI.Models.Character player, UI.Models.Character enemy) GetCombatants();
+		(UI.Models.Character player, UI.Models.Character enemy) GetCombatants();
 
-		static abstract List<string> GetPlayerAttacks();
+		List<string> GetPlayerAttacks();
 
-		static abstract int PlayerAttack(string attack);
+		int PlayerAttack(string attack);
 
-		static abstract (int health, string attack) EnemyAttack();
+		(int health, string attack) EnemyAttack();
 
-		static abstract bool IsThereAVictor();
+		bool IsThereAVictor();
 
-		static abstract bool IsThePlayerTheVictor();
+		bool IsThePlayerTheVictor();
 	}
 }

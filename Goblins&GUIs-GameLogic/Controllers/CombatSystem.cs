@@ -11,8 +11,8 @@ namespace GoblinsGUIsGameLogic.Controllers {
 		public static Player player;
 		public static NPC enemy;
 
-		private static bool gameWon;
-		private static bool playerWon;
+		private bool gameWon;
+		private bool playerWon;
 
 		public CombatSystem(Characters.Player currentPlayer, Characters.NPC currentEnemy) {
 			player = currentPlayer;
@@ -21,15 +21,15 @@ namespace GoblinsGUIsGameLogic.Controllers {
 			//Application.Run(new Combat(this));
 		}
 
-		public static (UI.Models.Character player, UI.Models.Character enemy) GetCombatants() {
+		public (UI.Models.Character player, UI.Models.Character enemy) GetCombatants() {
 			return (CharacterToUI(player), CharacterToUI(enemy));
 		}
 
-		public static List<string> GetPlayerAttacks() {
+		public List<string> GetPlayerAttacks() {
 			return player.attacks.Keys.ToList();
 		}
 
-		private static int Attack(string attack, bool isPlayerAttack) {
+		private int Attack(string attack, bool isPlayerAttack) {
 			Characters.Character dealer;
 			Characters.Character reciever;
 			if(isPlayerAttack) {
@@ -72,18 +72,18 @@ namespace GoblinsGUIsGameLogic.Controllers {
 			return reciever.Health;
 		}
 
-		public static int PlayerAttack(string attack) {
+		public int PlayerAttack(string attack) {
 			return Attack(attack, true);
 		}
 
-		public static (int health, string attack) EnemyAttack() {
+		public (int health, string attack) EnemyAttack() {
 			Random random = new Random();
 			string attack = enemy.attacks.Keys.ToList().ElementAt(random.Next(0, enemy.attacks.Count));
 
 			return (Attack(attack, false), attack);
 		}
 
-		private static UI.Models.Character CharacterToUI(Characters.Character characterToConvert) {
+		private UI.Models.Character CharacterToUI(Characters.Character characterToConvert) {
 			UI.Models.Character character = new UI.Models.Character();
 
 			character.Name = characterToConvert.name;
@@ -100,12 +100,12 @@ namespace GoblinsGUIsGameLogic.Controllers {
 			return character;
 		}
 
-		public static bool IsThereAVictor() {
+		public bool IsThereAVictor() {
 			gameWon = (player.Health == 0 || enemy.Health == 0);
 			return gameWon;
 		}
 
-		public static bool IsThePlayerTheVictor() {
+		public bool IsThePlayerTheVictor() {
 			playerWon = (enemy.Health == 0);
 			return playerWon;
 		}

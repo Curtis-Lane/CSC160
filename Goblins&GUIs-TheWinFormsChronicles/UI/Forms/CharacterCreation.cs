@@ -18,12 +18,12 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 		GoblinsGUIsGameLogic.UI.Models.Character playerCharacter;
 		string[] classTypes;
 
-		//ICreatePlayer playerCreator;
+		IMainGame playerCreator;
 
-		public CharacterCreation(/*ICreatePlayer playerCreator*/) {
+		public CharacterCreation(IMainGame playerCreator) {
 			InitializeComponent();
 
-			//this.playerCreator = playerCreator;
+			this.playerCreator = playerCreator;
 
 			playerCharacter = new GoblinsGUIsGameLogic.UI.Models.Character();
 			classTypes = new string[] {"Fighter", "Wizard"};
@@ -153,10 +153,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 
 		private void endCreationButton_Click(object sender, EventArgs e) {
 			if(AreStatsValid()) {
-				MainGame.CreatePlayer(playerCharacter.Name, (GoblinsGUIsGameLogic.Characters.Character.ClassType) playerCharacter.StringToClass(playerCharacter.Classtype), playerCharacter.Strength, playerCharacter.Dexterity, playerCharacter.Constitution, playerCharacter.Intelligence, playerCharacter.Wisdom, playerCharacter.Charisma);
-
-				Hide();
-				new Dialogue().ShowDialog();
+				playerCreator.CreatePlayer(playerCharacter.Name, (GoblinsGUIsGameLogic.Characters.Character.ClassType) playerCharacter.StringToClass(playerCharacter.Classtype), playerCharacter.Strength, playerCharacter.Dexterity, playerCharacter.Constitution, playerCharacter.Intelligence, playerCharacter.Wisdom, playerCharacter.Charisma);
 
 				Close();
 			}

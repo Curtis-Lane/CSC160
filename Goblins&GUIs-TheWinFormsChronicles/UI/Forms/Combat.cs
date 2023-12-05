@@ -12,18 +12,18 @@ using GoblinsGUIsGameLogic.UI.Models;
 
 namespace GoblinsGUIsTheWinFormsChronicles.UI {
 	public partial class Combat : Form {
-		//ICombatManager combatManager;
+		ICombatManager combatManager;
 		Character player;
 		Character enemy;
 
-		public Combat(/*ICombatManager combatManager*/) {
+		public Combat(ICombatManager combatManager) {
 			InitializeComponent();
-			//this.combatManager = combatManager;
+			this.combatManager = combatManager;
 			StartCombat();
 		}
 
 		void StartCombat() {
-			var combatants = CombatSystem.GetCombatants();
+			var combatants = combatManager.GetCombatants();
 			player = combatants.player;
 			enemy = combatants.enemy;
 
@@ -35,7 +35,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 			playerHealthLabel.DataBindings.Add("Text", player, "health", false, DataSourceUpdateMode.OnPropertyChanged);
 			enemyHealthLabel.DataBindings.Add("Text", enemy, "health", false, DataSourceUpdateMode.OnPropertyChanged);
 
-			List<string> playerAttacks = CombatSystem.GetPlayerAttacks();
+			List<string> playerAttacks = combatManager.GetPlayerAttacks();
 			for(int i = 0; i < playerAttacks.Count; i++) {
 				string attack = playerAttacks[i];
 
@@ -51,16 +51,16 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 		}
 
 		void attackButton_Click(object sender, EventArgs e) {
-			if(!CombatSystem.IsThereAVictor()) {
-				enemy.Health = CombatSystem.PlayerAttack(((Button) sender).Text);
+			if(!combatManager.IsThereAVictor()) {
+				enemy.Health = combatManager.PlayerAttack(((Button) sender).Text);
 
-				var result = CombatSystem.EnemyAttack();
+				var result = combatManager.EnemyAttack();
 				player.Health = result.health;
 				enemyAttackLabel.Text = "The enemy used " + result.attack + "!";
 			}
 
-			if(CombatSystem.IsThereAVictor()) {
-				if(CombatSystem.IsThePlayerTheVictor()) {
+			if(combatManager.IsThereAVictor()) {
+				if(combatManager.IsThePlayerTheVictor()) {
 					enemyAttackLabel.Text = "You Won!";
 				} else {
 					enemyAttackLabel.Text = "You Lost!";

@@ -15,7 +15,7 @@ namespace GoblinsGUIsGameLogic.Controllers {
 		/// Returns a tuple that contains, in order, the name of the NPC and the dialogue of the NPC
 		/// </summary>
 		/// <returns></returns>
-		static abstract (string name, string dialogue) GetFirstDialogue();
+		(string name, string dialogue) GetFirstDialogue();
 
 		/// <summary>
 		/// Returns a tuple that contains, in order, the dialogue of the NPC and any potential repsonses that the player might be able to use,
@@ -24,6 +24,6 @@ namespace GoblinsGUIsGameLogic.Controllers {
 		/// Also returns any relevant information regarding skill checks for the current responses
 		/// </summary>
 		/// <returns></returns>
-		static abstract (string dialogue, List<(string response, string checkType, int dc, int playerStat)>? responses) GetNextDialogue(string? responseText = null);
+		(string dialogue, List<(string response, string checkType, int dc, int playerStat)>? responses) GetNextDialogue(string? responseText = null);
 	}
 }

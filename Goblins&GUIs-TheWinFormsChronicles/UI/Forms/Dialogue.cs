@@ -11,29 +11,25 @@ using GoblinsGUIsGameLogic.Controllers;
 
 namespace GoblinsGUIsTheWinFormsChronicles.UI {
 	public partial class Dialogue : Form {
-		//private IDialogueManager dialogueManager;
+		private IDialogueManager dialogueManager;
 
-		public Dialogue(/*IDialogueManager dialogueManager*/) {
+		public Dialogue(IDialogueManager dialogueManager) {
 			InitializeComponent();
-			//this.dialogueManager = dialogueManager;
+			this.dialogueManager = dialogueManager;
 			StartDialogue();
 		}
 
 		private void StartDialogue() {
-			var data = DialogueSystem.GetFirstDialogue();
+			var data = dialogueManager.GetFirstDialogue();
 			dialogueBox.Text = data.name;
 			dialogueText.Text = data.dialogue;
 		}
 
 		private void GoToNextDialogue(string? responseText = null) {
-			var data = DialogueSystem.GetNextDialogue(responseText);
+			var data = dialogueManager.GetNextDialogue(responseText);
 
 			if(data.dialogue == "-1") {
-				Hide();
-				new Combat().ShowDialog();
-
 				Close();
-
 				return;
 			}
 
