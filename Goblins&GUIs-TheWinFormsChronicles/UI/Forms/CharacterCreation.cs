@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using GoblinsGUIsGameLogic.Controllers;
-using GoblinsGUIsGameLogic.Characters;
 using GoblinsGUIsGameLogic.UI.Models;
 
 namespace GoblinsGUIsTheWinFormsChronicles.UI {
 	public partial class CharacterCreation : Form {
 		Random random = new Random();
-		GoblinsGUIsGameLogic.UI.Models.Character playerCharacter;
+		Character playerCharacter;
 		string[] classTypes;
 
 		IMainGame playerCreator;
@@ -25,7 +24,7 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI {
 
 			this.playerCreator = playerCreator;
 
-			playerCharacter = new GoblinsGUIsGameLogic.UI.Models.Character();
+			playerCharacter = new Character();
 			classTypes = new string[] {"Fighter", "Wizard"};
 
 			InitializeCharacterInfo();

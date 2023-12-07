@@ -52,4 +52,17 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Goblins&amp;GUIs-GameLogic\Goblins&amp;GUIs-GameLogic.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\CharacterCreation.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Dialogue.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
