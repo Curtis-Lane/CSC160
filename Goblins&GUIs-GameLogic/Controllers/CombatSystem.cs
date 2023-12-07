@@ -14,11 +14,9 @@ namespace GoblinsGUIsGameLogic.Controllers {
 		private bool gameWon;
 		private bool playerWon;
 
-		public CombatSystem(Characters.Player currentPlayer, Characters.NPC currentEnemy) {
+		public CombatSystem(Player currentPlayer, NPC currentEnemy) {
 			player = currentPlayer;
 			enemy = currentEnemy;
-
-			//Application.Run(new Combat(this));
 		}
 
 		public (UI.Models.Character player, UI.Models.Character enemy) GetCombatants() {
@@ -77,10 +75,16 @@ namespace GoblinsGUIsGameLogic.Controllers {
 		}
 
 		public (int health, string attack) EnemyAttack() {
-			Random random = new Random();
-			string attack = enemy.attacks.Keys.ToList().ElementAt(random.Next(0, enemy.attacks.Count));
+			var enemyAttacks = enemy.attacks.Keys.ToList();
 
-			return (Attack(attack, false), attack);
+			string strongestAttack = enemyAttacks[0];
+			foreach(string attack in enemyAttacks) {
+				if(enemy.attacks[attack].damage > enemy.attacks[strongestAttack].damage) {
+					strongestAttack = attack;
+				}
+			}
+
+			return (Attack(strongestAttack, false), strongestAttack);
 		}
 
 		private UI.Models.Character CharacterToUI(Characters.Character characterToConvert) {
