@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="GoblinsGUIsMAUI.UI.Pages.Combat"
+			 Title="Combat">
+	<VerticalStackLayout
+		x:Name="layout" >
+		
+		<Label 
+			Text="Enemy Name"
+			x:Name="enemyNameLabel"
+			VerticalOptions="Center" 
+			HorizontalOptions="End"
+			Margin="0,0,200,0"
+			/>
+		<Label
+			Text="Health: "
+			x:Name="enemyHealth"
+			HorizontalOptions="End"
+			Margin="0,5,197,0"
+			/>
+		<Label
+			Text="#"
+			x:Name="enemyHealthLabel"
+			HorizontalOptions="End"
+			Margin="0,-20,170,0"
+			/>
+
+		<Label
+			Text="#"
+			x:Name="enemyAttackLabel"
+			HorizontalOptions="Center"
+			Margin="0,50,0,0"
+			/>
+
+		<Label
+			Text="Player Name"
+			x:Name="playerNameLabel"
+			HorizontalOptions="Start"
+			Margin="0,50,0,0"
+			/>
+		<Label
+			Text="Health: "
+			x:Name="playerHealth"
+			Margin="0,5,0,0"
+			/>
+		<Label
+			Text="#"
+			x:Name="playerHealthLabel"
+			Margin="60,-20,0,0"
+			/>
+	</VerticalStackLayout>
+</ContentPage>

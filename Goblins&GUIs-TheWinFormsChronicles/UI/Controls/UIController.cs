@@ -12,12 +12,12 @@ namespace GoblinsGUIsTheWinFormsChronicles.UI.Controls {
 		private IDialogueManager dialogueManager;
 		private ICombatManager combatManager;
 
-		//
-
 		public void Run() {
 			mainGame = new MainGame();
 
-			Application.Run(new CharacterCreation(mainGame));
+			while(mainGame.GetPlayer() == null) {
+				Application.Run(new CharacterCreation(mainGame));
+			}
 
 			dialogueManager = new DialogueSystem(mainGame.GetNarrator(), mainGame.GetPlayer());
 
